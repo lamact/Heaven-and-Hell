@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) => MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: const Text('Plugin example app'),
+            title: const Text('天国と地獄'),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -290,23 +290,25 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     PaddedElevatedButton(
-                      buttonText: 'Show plain notification with payload',
+                      buttonText: '通知例１（タイトル＋本文）を送る',
                       onPressed: () async {
-                        await _showNotification();
+                        await _showNotification('悪魔より', '勉強しているのか？', '勉強状況確認');
                       },
                     ),
                     PaddedElevatedButton(
-                      buttonText:
-                          'Show plain notification that has no title with '
-                          'payload',
+                      buttonText: '通知例２（タイトル＋本文）を送る',
+                      onPressed: () async {
+                        await _showNotification('天使より', '少しは休みましょう', '休憩推奨');
+                      },
+                    ),
+                    PaddedElevatedButton(
+                      buttonText: '通知（本文）を送る',
                       onPressed: () async {
                         await _showNotificationWithNoTitle();
                       },
                     ),
                     PaddedElevatedButton(
-                      buttonText:
-                          'Show plain notification that has no body with '
-                          'payload',
+                      buttonText: '通知（タイトル）を送る',
                       onPressed: () async {
                         await _showNotificationWithNoBody();
                       },
@@ -622,7 +624,8 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-  Future<void> _showNotification() async {
+  Future<void> _showNotification(
+      String noticetitle, String noticebody, String noticepayload) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
             'your channel id', 'your channel name', 'your channel description',
@@ -632,8 +635,8 @@ class _HomePageState extends State<HomePage> {
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
-        0, 'plain title', 'plain body', platformChannelSpecifics,
-        payload: 'item x');
+        0, noticetitle, noticebody, platformChannelSpecifics,
+        payload: noticepayload);
   }
 
   Future<void> _showFullScreenNotification() async {
@@ -1766,15 +1769,42 @@ class SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Second Screen with payload: ${_payload ?? ''}'),
+          title: Text('${_payload ?? ''}'),
         ),
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Go back!'),
-          ),
-        ),
+            child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Center(
+                    child: Column(children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                    child: Text('本当のことをお伝えください'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                    child: Text.rich(
+                      TextSpan(
+                        children: <InlineSpan>[
+                          const TextSpan(
+                            text: '嘘はあなたを救いません',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('勉強していました'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('勉強していませんでした'),
+                  ),
+                ])))),
       );
 }
