@@ -113,7 +113,6 @@ Future<void> main() async {
 Future<void> _configureLocalTimeZone() async {
   tz.initializeTimeZones();
   final String? timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
-  print('113');
   print(timeZoneName);
   try {
     tz.setLocalLocation(tz.getLocation(timeZoneName!));
@@ -124,7 +123,7 @@ Future<void> _configureLocalTimeZone() async {
     tz.setLocalLocation(tz.getLocation(fallback));
   }
   //
-  print('114');
+  print('test');
 }
 
 class PaddedElevatedButton extends StatelessWidget {
