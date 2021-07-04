@@ -290,15 +290,26 @@ class _HomePageState extends State<HomePage> {
                     PaddedElevatedButton(
                       buttonText: '通知例１（タイトル＋本文）を送る',
                       onPressed: () async {
-                        await _showNotification('悪魔より', '勉強しているのか？', '1');
+                        await _showNotification(
+                            '悪魔より', '大丈夫か？勉強しないと試験落ちるぞ？', '1');
                       },
                     ),
                     PaddedElevatedButton(
                       buttonText: '通知例２（タイトル＋本文）を送る',
                       onPressed: () async {
-                        await _showNotification('天使より', '少しは休みましょう', '2');
+                        await _showNotification(
+                            '天使より', '明日から勉強すれば問題ありません', '2');
                       },
                     ),
+
+                    TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "テキストボックス",
+                        hintText: "まぁ何か入力してみてよ！",
+                      ),
+                    ),
+
                     // PaddedElevatedButton(
                     //   buttonText: '通知（本文）を送る',
                     //   onPressed: () async {
@@ -331,14 +342,13 @@ class _HomePageState extends State<HomePage> {
                     //     await _repeatNotification();
                     //   },
                     // ),
-                    // PaddedElevatedButton(
-                    //   buttonText:
-                    //       'Schedule daily 10:00:00 am notification in your '
-                    //       'local time zone',
-                    //   onPressed: () async {
-                    //     await _scheduleDailyTenAMNotification();
-                    //   },
-                    // ),
+                    PaddedElevatedButton(
+                      buttonText: '毎日 10:00am 通知 '
+                          'your local time zone',
+                      onPressed: () async {
+                        await _scheduleDailyTenAMNotification();
+                      },
+                    ),
                     // PaddedElevatedButton(
                     //   buttonText:
                     //       'Schedule daily 10:00:00 am notification in your '
@@ -435,20 +445,20 @@ class _HomePageState extends State<HomePage> {
                     //       await _showInsistentNotification();
                     //     },
                     //   ),
-                    //   PaddedElevatedButton(
-                    //     buttonText: 'Show big picture notification',
-                    //     onPressed: () async {
-                    //       await _showBigPictureNotification();
-                    //     },
-                    //   ),
-                    //   PaddedElevatedButton(
-                    //     buttonText:
-                    //         'Show big picture notification, hide large icon '
-                    //         'on expand',
-                    //     onPressed: () async {
-                    //       await _showBigPictureNotificationHiddenLargeIcon();
-                    //     },
-                    //   ),
+                    // PaddedElevatedButton(
+                    //   buttonText: 'Show big picture notification',
+                    //   onPressed: () async {
+                    //     await _showBigPictureNotification();
+                    //   },
+                    // ),
+                    PaddedElevatedButton(
+                      buttonText:
+                          'Show big picture notification, hide large icon '
+                          'on expand',
+                      onPressed: () async {
+                        await _showBigPictureNotificationHiddenLargeIcon();
+                      },
+                    ),
                     //   PaddedElevatedButton(
                     //     buttonText: 'Show media notification',
                     //     onPressed: () async {
@@ -887,9 +897,9 @@ class _HomePageState extends State<HomePage> {
     final BigPictureStyleInformation bigPictureStyleInformation =
         BigPictureStyleInformation(FilePathAndroidBitmap(bigPicturePath),
             hideExpandedLargeIcon: true,
-            contentTitle: 'overridden <b>big</b> content title',
+            contentTitle: 'テスト <b>画像</b> 通知',
             htmlFormatContentTitle: true,
-            summaryText: 'summary <i>text</i>',
+            summaryText: 'あ <i>text</i>',
             htmlFormatSummaryText: true);
     final AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails('big text channel id',
